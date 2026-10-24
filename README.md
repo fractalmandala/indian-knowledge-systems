@@ -17,7 +17,7 @@ High level goals:
 ## projects and repos
 Repo links are currently local drive links, and those sources are not on Github. This is due to large size of data. Needs eventual resolution.
 
-- current lead project is [Dharmalib](https://www.dharmalib.in) - `~/dharmalib`
+- current lead project is [Dharmalib](https://www.dharmalib.in) - `~/dharmalib` | [Github](https://github.com/fractalmandala/dharmalib)
 - secondary project [Bodha Open Library](https://www.bodharesearch.in/library) - `~/Documents/GitHub/bodhaNew2/src/lib/serving/library-items.json`
 
 ### Sanskrit repo - `~/SanskritRepo`
@@ -34,6 +34,12 @@ Repo links are currently local drive links, and those sources are not on Github.
 Dharmalib data sits inside its own folder, as static content.
 - core DSC Cologne data: 250+ texts in `.json` form. Rigvda, Ramayana, and Mahabharata collections are huge. Mahabharata has to be split in two.
 - various lemma, dhata, text helper files.
+
+The data in these json files has flat compounds. A compound appears as a header token carrying `compoundEnd` plus the full printed surface, with `_` for `lemma/upos/feats` - then its member tokens follow inline. Headers never nest, and member ids repeat the header’s range, so ids aren’t unique within a verse. Any renderer that treats the token list as a plain sequence will print the compound twice.
+
+A “verse” is a line. `reference` is `Siglum, [division, …]dotted.numbers` - `Bhairavastava`, `1.1`, `AĀ`, `2`, `1`, `5.4`, `AHS, Cikitsitasthāna`, `8.104.2`. A third number (1.1.2) is another line of the same stanza, so lines must be grouped by reference rather than rendered one-per-stanza.
+
+See `utilities/dharmalib-parser` for more.
 
 ## Contact and License
 
